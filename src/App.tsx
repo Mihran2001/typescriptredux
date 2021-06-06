@@ -1,17 +1,19 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import "./App.css";
+import { currentUserState } from "./features/currentUser/currentUserSlice";
+import { editName } from "./features/currentUser/currentUserSlice";
 
 function App() {
-  const value = useSelector(function (state: any) {
-    return state.value;
-  });
+  const name = useSelector(currentUserState);
   const dispatch = useDispatch();
+  console.log(name);
   return (
     <>
-      <h1> {value} </h1>
+      <h1> {name} </h1>
+      <input onChange={(e) => dispatch(editName(e.target.value))} />
+
       <input
-        onChange={(e) => dispatch({ type: "addInput", value: e.target.value })}
+        onChange={(e) => dispatch({ type: "add-todo", value: e.target.value })}
       />
     </>
   );
