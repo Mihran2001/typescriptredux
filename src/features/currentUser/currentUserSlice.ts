@@ -25,9 +25,17 @@ export const editName = (newName: any) => {
   };
 };
 
-// export const loadUser = async () => {
-//   return async (dispactch: any, getState: any) => {
-//     const timeOutFunc = loadCurrentUser();
-//     return timeOutFunc();
+// export function loadUser() {
+//   return (dispatch: any, getState: any) => {
+//     return loadCurrentUser().then((loadedUser: any) => {
+//       dispatch(editName(loadedUser.name));
+//     });
 //   };
-// };
+// }
+
+export function loadUser() {
+  return async (dispatch: any, getState: any) => {
+    const loadedUser = await loadCurrentUser();
+    dispatch(editName(loadedUser.name));
+  };
+}
